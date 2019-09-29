@@ -11,8 +11,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="{{asset('assets/admin/css/Nunito.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/admin/css/Nunito.css')}}" rel="stylesheet">
+    <link href="{{asset('css/fontawesome.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/admin/css/sb-admin-2.min.css')}}" rel="stylesheet">

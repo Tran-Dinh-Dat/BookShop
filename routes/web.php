@@ -14,9 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', function () {
-        return view('admin.pages.index');
-    });
-    
+
+Route::group(['namespace' => 'Admin','prefix' => 'admin'], function () {
+    Route::get('/', 'HomeController@index');
+    Route::resource('category', 'CategoryController');
 });
