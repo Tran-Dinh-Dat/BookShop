@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 @section('title')
-    Category
+    product_type
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
     
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary d-block float-left">Categories Products</h6>
+        <h6 class="m-0 font-weight-bold text-primary d-block float-left">Product Type</h6>
         <a href="#" class="btn btn-success btn-icon-split float-right" data-toggle="modal" data-target="#modelId">
-            <span class="text">Add Category</span>
+            <span class="text">Add Product Type</span>
         </a>
         
         <!-- Modal -->
@@ -17,17 +17,25 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Category</h5>
+                        <h5 class="modal-title">Add Product Type</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route('category.store')}}" method="post">
+                        <form action="{{route('productType.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                              <label for="">Category Name</label>
-                              <input type="text" name="name" id="category" class="form-control">
+                              <label for="">Product Type Name</label>
+                              <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Category</label>
+                              <select class="form-control" name="category_id" id="">
+                                  @foreach ($categories as $item)
+                                      <option value="{{$item->id}}" id="{{$item->id}}">{{$item->name}}</option>
+                                  @endforeach
+                              </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -72,7 +80,7 @@
                             <thead>
                                 <tr role="row">
                                     <th>#</th>
-                                    <th>Category Name</th>
+                                    <th>product_type Name</th>
                                     <th>Slug</th>
                                     <th>Create at</th>
                                     <th>Action</th>
@@ -81,33 +89,33 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Category Name</th>
+                                    <th>product_type Name</th>
                                     <th>Slug</th>
                                     <th>Create at</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($product_types as $product_type)
                                 <tr role="row">
-                                    <td class="sorting_1">{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->slug }}</td>
-                                    <td>{{ $category->created_at }}</td>
+                                    <td class="sorting_1">{{ $product_type->id }}</td>
+                                    <td>{{ $product_type->name }}</td>
+                                    <td>{{ $product_type->slug }}</td>
+                                    <td>{{ $product_type->created_at }}</td>
                                     <td>
-                                        <button  type="submit" class="btn btn-info btn-circle float-left mr-1" data-toggle="modal" data-target="#edit{{$category->id}}">
+                                        <button  type="submit" class="btn btn-info btn-circle float-left mr-1" data-toggle="modal" data-target="#edit{{$product_type->id}}">
                                             <i class="far fa-edit"></i>
                                         </button>
                                         
                                         <!-- Modal -->
-                                        <form action="{{route('category.update', $category->id)}}" method="post">
+                                        <form action="{{route('productType.update', $product_type->id)}}" method="post">
                                             @csrf
                                             @method("PUT")
-                                            <div class="modal fade" id="edit{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                            <div class="modal fade" id="edit{{$product_type->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Edit Category</h5>
+                                                            <h5 class="modal-title">Edit Product Type</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -115,11 +123,19 @@
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="">Id</label>
-                                                                <input readonly type="text" name="id" id="id" class="form-control" value="{{ $category->id}}">
+                                                                <input readonly type="text" name="id" id="id" class="form-control" value="{{ $product_type->id}}">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="">Category Name</label>
-                                                                <input type="text" name="name" id="category" class="form-control" value="{{ $category->name}}">
+                                                                <label for="">Product Type Name</label>
+                                                                <input type="text" name="name" id="name" class="form-control" value="{{ $product_type->name}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">Category</label>
+                                                                <select class="form-control" name="category_id" id="">
+                                                                    @foreach ($categories as $item)
+                                                                        <option value="{{$item->id}}" id="{{$item->id}}">{{$item->name}}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -132,7 +148,7 @@
                                         </form>
 
 
-                                        <form action="{{route('category.destroy', $category->id)}}" method="post">
+                                        <form action="{{route('productType.destroy', $product_type->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button  type="submit" class="btn btn-danger btn-circle">
@@ -150,7 +166,7 @@
                     <div class="col-sm-12 col-md-5">
                     </div>
                     <div class="col-sm-12 col-md-7">
-                            {{ $categories->links() }}
+                            {{-- {{ $product_types->links() }} --}}
                     </div>
                 </div>
             </div>
