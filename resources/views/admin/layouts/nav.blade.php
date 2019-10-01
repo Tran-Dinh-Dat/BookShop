@@ -33,6 +33,12 @@
             <span>Categories</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{route('productType.index')}}" >
+            <i class="fas fa-list-ul"></i>
+            <span>Product Type</span>
+        </a>
+    </li>
 
     
 
